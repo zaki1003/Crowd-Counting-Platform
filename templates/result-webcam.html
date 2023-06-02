@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Image Prediction using PyTorch</title>
+    <style>
+
+        #container {
+            padding-top: 60px;
+        }
+
+        #Line {
+            border-top: thick solid #f23165;
+            width: 150px;
+            padding-bottom: 10px;
+        }
+
+        h1 {
+            color: rgba(11, 47, 57, 0.85);
+            font-family: "Arial Black", Gadget, sans-serif;
+        }
+
+        h2 {
+            color: #f23165;
+            font-family: "Arial";
+        }
+
+        h3 {
+          color: rgba(0, 0, 0, 0.79);
+          font-family: "Arial Black", Gadget, sans-serif;
+          font-weight: bold;
+        }
+
+        #density {
+          width: 30%;
+          height: auto;
+        }
+
+        #stop-video {
+            font-family: Arial;
+            margin-bottom: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #f23165;
+            border: #FFFFFF;
+            border-radius: 5px;
+            cusor: pointer;
+        }
+
+        #custom-button:hover {
+            background-color: #ff2f55;
+        }
+
+    </style>
+  </head>
+
+
+
+  <body class="text-center">
+
+  <div align="center" id="container">
+      <form class="form-signin" method=post action ="/" enctype=multipart/form-data>
+        <h1 class="h3 mb-3 font-weight-normal">Prediction with webcam </h1>
+        <input type="text" name="method" id="method" hidden="hidden" value={{Method}}/>
+        <br>
+        <br>
+          <button type="submit" id="stop-video"  value="stop-video" name="stop-video" > <b> Stop prediction with webcam </b></button>
+    </form>
+  </div>
+  </body>
+
+</html>

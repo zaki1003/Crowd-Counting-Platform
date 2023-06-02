@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Image Prediction using PyTorch</title>
+    <style media="screen">
+
+        #logo {
+            position: static;
+            margin-top:150px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+        #container {
+            margin-left: auto;
+            margin-right: auto;
+            width: 400px;
+        }
+
+        h1 {
+            color: rgba(11, 47, 57, 0.85);
+            font-family: "Arial Black", Gadget, sans-serif;
+            padding-bottom: 3px;
+        }
+
+        p {
+          color: rgba(0, 0, 0, 0.79);
+          font-family: "Arial Black", Gadget, sans-serif;
+        }
+
+        #Line {
+            border-top: thick solid #f23165;
+            width: 200px;
+            padding-bottom: 15px;
+        }
+
+        #custom-button {
+            font-family: Arial;
+            margin-bottom: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #3fc1c1;
+            border: #FFFFFF;
+            border-radius: 5px;
+            cusor: pointer;
+        }
+
+        #custom-button:hover {
+            background-color: #44dfdf;
+        }
+
+        #custom-text {
+            font-family: sans-serif;
+            color: #44dfdf;
+        }
+
+        .gradient-button {
+            margin: 10px;
+            font-family: "Arial Black", Gadget, sans-serif;
+            font-size: 2em;
+            padding: 15px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: #FFF;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            width: 200px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+            cursor: pointer;
+            display: inline-block;
+            border-radius: 25px;
+        }
+
+        .gradient-button:hover {
+            margin: 158px 10px 12px;
+            
+        }
+
+        .gradient-button-1 {background-image: linear-gradient(to right, #3fc1c1 0%, #f23165 51%, #3fc1c1 100%)   ;   margin-top:150px;}
+        .gradient-button-1:hover { background-position: right center;   margin-top:150px;}
+
+    </style>
+  </head>
+
+  <body class="text-center">
+
+  <div align="center" id="logo">
+        <img src="/static/crowdcounting_logo.png" alt="Logo">
+  </div>
+
+  <div align="center" id="container">
+
+      <div id="Line">
+      </div>
+      <h1 class="h3 mb-3 font-weight-normal" id="mainTitle">UPLOAD CROWD</h1>
+      <form method=post enctype=multipart/form-data>
+
+
+        <input type="file" name="file" class="form-control-file" id="input-file" hidden="hidden" />
+          <button type="button" id="custom-button"> <b> Choose a crowd </b> </button>
+
+        <br>
+        
+  <label for="cars">Choose a method:</label>
+  <select name="method" id="method">
+    <option value="fidtm">FIDTM</option>
+    <option value="p2pnet">P2PNet</option>
+    <option value="crnet">CRNet</option>
+
+  </select>
+  <br><br>
+        <button class="btn btn-primary btn-sm" type="submit" id="upload-file" hidden="hidden" value="upload-file" name="upload-file">Upload</button>
+        
+        
+        <a class="gradient-button gradient-button-1" id="count-button">Count</a>
+
+        
+                <button class="gradient-button gradient-button-1" type="submit" id="use-webcam" value="use-webcam" name="use-webcam">Use Webcam</button>
+        
+        
+        <script type="text/javascript">
+            const realFileBtn = document.getElementById("input-file");
+            const customBtn = document.getElementById("custom-button");
+            const customTxt = document.getElementById("custom-text");
+
+            let checkSize = function(threshold) {
+              const file_size_raw = realFileBtn.files.item(0).size;
+              const file_size = Math.round((file_size_raw / 1024));
+              return file_size < threshold;
+            };
+
+            customBtn.addEventListener("click", function() {
+                realFileBtn.click();
+            });
+
+            realFileBtn.addEventListener("change", function() {
+                // Check file size
+                if (realFileBtn.files.length > 0) {
+                  if (!checkSize(100000)) {
+                    alert("File exceeds maximum memory allowance of 100kb.");
+                    realFileBtn.value = "";
+                  } else {
+                    // Check extensions
+                    let ext = realFileBtn.value.split('.').pop();
+                    if (ext != "jpg" && ext != "jpeg" && ext != "mp4") {
+                      alert("Invalid file type: " + ext + ". File must be either .jpg or .jpeg formats  or .mp4 formats");
+                      realFileBtn.value = "";
+                    } else {
+                      customTxt.innerHTML = "Crowd Image: " + realFileBtn.value.match(/[\/\\]([\w\d\s.\=\(\)]+)$/)[1];
+                    }
+                  }
+                } else {
+                  customTxt.innerHTML = "Image must be under 100kb";
+                }
+            });
+
+
+            const countBtn = document.getElementById("count-button");
+            const uploadBtn = document.getElementById("upload-file");
+
+            countBtn.addEventListener("click", function() {
+                if (realFileBtn.files.length > 0) {
+                  uploadBtn.click();
+                } else {
+                  alert("No file uploaded.")
+                }
+            });
+        </script>
+
+
+    </form>
+  </div>
+
+    <!--
+    <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $('#inputfile').bind('change', function() {
+          let fileSize = this.files[0].size/1024/1024; // this gives in MB
+          if (fileSize > 1) {
+            $("#inputfile").val(null);
+            alert('file is too big. images more than 1MB are not allowed')
+            return
+          }
+          let ext = $('#inputfile').val().split('.').pop().toLowerCase();
+          if($.inArray(ext, ['jpg','jpeg']) == -1) {
+            $("#inputfile").val(null);
+            alert('only jpeg/jpg files are allowed!');
+          }
+      });
+    </script>
+    -->
+  </body>
+
+</html>
