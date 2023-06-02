@@ -25,11 +25,14 @@ transform=transforms.Compose([transforms.ToTensor(),transforms.Normalize(mean=[0
 
 
 class VideoCamera(object):
-    def __init__(self):
+    def __init__(self,fileName):
         # Using OpenCV to capture from device 0. If you have trouble capturing
         # from a webcam, comment the line below out and use a video file
         # instead.
-        self.video = cv2.VideoCapture(0)
+        if (fileName ==''):
+            self.video = cv2.VideoCapture(0)
+        else:  
+            self.video = cv2.VideoCapture(fileName)   
 #        self.video = cv2.resize(self.video,(840,640))
         # If you decide to use video.mp4, you must have this file in the folder
         # as the main.py.
@@ -52,14 +55,6 @@ class VideoCamera(object):
         width = frame.shape[1] #output size
         height = frame.shape[0] #output size
      
-     
-
-
-
-
-
-
-
 
         while True:
      
@@ -69,9 +64,7 @@ class VideoCamera(object):
                 scale_factor = 0.5
                 frame = cv2.resize(frame, (0, 0), fx=scale_factor, fy=scale_factor)
                 ori_img = frame.copy()
-                print("Tryyyyyyyyyyyyyyyyyy") 
             except:
-                print("test end")
                 cap.release()
                 break
                 
@@ -97,7 +90,6 @@ class VideoCamera(object):
      
   
    
-            print("org_img") 
      
 
       
@@ -112,7 +104,6 @@ class VideoCamera(object):
             image_names=[]
 
             image_names = [org_img,density ]
-            print( " image names", image_names) 
             images = []
             max_width = 0 # find the max width of all the images
             total_height = 0 # the total height of the images (vertical stacking)
@@ -137,19 +128,7 @@ class VideoCamera(object):
                 current_y += image.shape[0]
 
 
-            print("final_image", final_image) 
-      
-
-
-
-
-
-
-
-
-
-        
-       
+     
         # We are using Motion JPEG, but OpenCV defaults to capture raw images,
         # so we must encode it into JPEG in order to correctly display the
         # video stream.

@@ -142,7 +142,7 @@ def get_prediction_webcam(event: Event ):
 
 
 
-def get_prediction(file, event: Event):
+def get_prediction(file):
 
 
 
