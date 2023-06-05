@@ -39,14 +39,14 @@ def get_prediction_webcam(event: Event ):
     out = cv2.VideoWriter('./demo.avi', fourcc, 30, (width, height))
 
     while True:
-        print("event_isSet In Inference bellow While true: ",                 event.is_set()) 
+   
         try:
             ret, frame = cap.read()
 
             scale_factor = 0.5
             frame = cv2.resize(frame, (0, 0), fx=scale_factor, fy=scale_factor)
             ori_img = frame.copy()
-            print("Tryyyyyyyyyyyyyyyyyy") 
+          
         except:
             print("test end")
             cap.release()
@@ -71,7 +71,7 @@ def get_prediction_webcam(event: Event ):
 
 
    
-        print("org_img") 
+  
      
 
       

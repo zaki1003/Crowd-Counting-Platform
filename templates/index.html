@@ -4,26 +4,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Image Prediction using PyTorch</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style media="screen">
 
         #logo {
             position: static;
-            margin-top:150px;
+            margin-top:50px;
             margin-left: auto;
             margin-right: auto;
+         margin-bottom: 10px;
 
         }
 
         #container {
             margin-left: auto;
             margin-right: auto;
-            width: 400px;
+            width: 600px;
+
         }
 
         h1 {
             color: rgba(11, 47, 57, 0.85);
             font-family: "Arial Black", Gadget, sans-serif;
             padding-bottom: 3px;
+               padding-top: 30px;
         }
 
         p {
@@ -31,59 +35,41 @@
           font-family: "Arial Black", Gadget, sans-serif;
         }
 
+        a {
+         background-color: white;
+          font-family: "Arial White", Gadget, sans-serif;
+          color: #44dfdf;
+        }
         #Line {
-            border-top: thick solid #f23165;
-            width: 200px;
+            border-top: medium solid #28ACEA;
+            
+            width: 300px;
+   
             padding-bottom: 15px;
+                 margin-bottom:50px;
         }
+  
 
-        #custom-button {
-            font-family: Arial;
-            margin-bottom: 5px;
-            padding: 10px;
-            color: white;
-            background-color: #3fc1c1;
-            border: #FFFFFF;
-            border-radius: 5px;
-            cusor: pointer;
-        }
-
-        #custom-button:hover {
-            background-color: #44dfdf;
+        #custom-text1 {
+            padding-top: 40px;
+             font-size: 25px;
+             font-family: "Arial Black", Gadget, sans-serif;
+             color: #304c54;
+   
         }
 
         #custom-text {
-            font-family: sans-serif;
-            color: #44dfdf;
+            padding-top: 40px;
+             font-size: 15px;
+             font-family: "Arial Black", Gadget, sans-serif;
+             color: #304c54;
+   
+        }
+ #count-button {
+            color: white;
+           
         }
 
-        .gradient-button {
-            margin: 10px;
-            font-family: "Arial Black", Gadget, sans-serif;
-            font-size: 2em;
-            padding: 15px;
-            text-align: center;
-            text-transform: uppercase;
-            transition: 0.5s;
-            background-size: 200% auto;
-            color: #FFF;
-            box-shadow: 0 0 20px #eee;
-            border-radius: 10px;
-            width: 200px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-            cursor: pointer;
-            display: inline-block;
-            border-radius: 25px;
-        }
-
-        .gradient-button:hover {
-            margin: 158px 10px 12px;
-            
-        }
-
-        .gradient-button-1 {background-image: linear-gradient(to right, #3fc1c1 0%, #f23165 51%, #3fc1c1 100%)   ;   margin-top:150px;}
-        .gradient-button-1:hover { background-position: right center;   margin-top:150px;}
 
     </style>
   </head>
@@ -98,30 +84,30 @@
 
       <div id="Line">
       </div>
-      <h1 class="h3 mb-3 font-weight-normal" id="mainTitle">UPLOAD CROWD</h1>
+      <h1 class="h4 mb-3 font-weight-normal" id="mainTitle">UPLOAD CROWD</h1>
       <form method=post enctype=multipart/form-data>
 
 
         <input type="file" name="file" class="form-control-file" id="input-file" hidden="hidden" />
-          <button type="button" id="custom-button"> <b> Choose a crowd </b> </button>
+          <button type="button" class="btn btn-outline-primary" id="custom-button"> <b> Import Image or Video </b> </button>
 
         <br>
-        
-  <label for="cars">Choose a method:</label>
-  <select name="method" id="method">
+        <label  id="custom-text"> </label>
+        <br>
+  <label for="methods"  id="custom-text1">Choose a method : </label>
+  <select name="method" class="custom-select"  id="method">
     <option value="fidtm">FIDTM</option>
     <option value="p2pnet">P2PNet</option>
     <option value="crnet">CRNet</option>
 
   </select>
-  <br><br>
+  <br><br>  <br><br>  <br><br>  <br><br>  
         <button class="btn btn-primary btn-sm" type="submit" id="upload-file" hidden="hidden" value="upload-file" name="upload-file">Upload</button>
         
         
-        <a class="gradient-button gradient-button-1" id="count-button">Count</a>
+       <a class="btn btn-primary btn-lg"  style="width: 10em;"  id="count-button">Count</a>
 
-        
-                <button class="gradient-button gradient-button-1" type="submit" id="use-webcam" value="use-webcam" name="use-webcam">Use Webcam</button>
+      <button class="btn btn-primary btn-lg" style="margin-left: 4em; width: 10em" type="submit" id="use-webcam" value="use-webcam" name="use-webcam">Use Camera</button>
         
         
         <script type="text/javascript">
@@ -152,7 +138,7 @@
                       alert("Invalid file type: " + ext + ". File must be either .jpg or .jpeg formats  or .mp4 formats");
                       realFileBtn.value = "";
                     } else {
-                      customTxt.innerHTML = "Crowd Image: " + realFileBtn.value.match(/[\/\\]([\w\d\s.\=\(\)]+)$/)[1];
+                      customTxt.innerHTML = "Uploaded File: " + realFileBtn.value.match(/[\/\\]([\w\d\s.\=\(\)]+)$/)[1];
                     }
                   }
                 } else {
@@ -197,6 +183,10 @@
       });
     </script>
     -->
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   </body>
 
 </html>

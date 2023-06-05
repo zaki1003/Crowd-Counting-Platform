@@ -9,19 +9,19 @@ from camera_csrnet import VideoCamera as VideoCameraCSRNet
 
 import cv2
 from inferenceFIDTM import get_prediction as get_prediction_fidtm
-from inferenceFIDTM import get_prediction_webcam as get_prediction_fidtm_webcam
+
 
 
 
 
 from inferenceP2PNet import get_prediction as get_prediction_p2pnet
-from inferenceP2PNet import get_prediction_webcam as get_prediction_p2pnet_webcam
+
 
 from threading import Thread, Event
 
 
 from inferenceCRNet import get_prediction as get_prediction_crnet
-from inferenceCRNet import get_prediction_webcam as get_prediction_csrnet_webcam
+
 
 
 from werkzeug.utils import secure_filename
@@ -42,26 +42,12 @@ method = ''
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
 
-    thread_fidtm_webcam = Thread(target = get_prediction_fidtm_webcam ,args=( event,))
-    thread_p2pnet_webcam = Thread(target = get_prediction_p2pnet_webcam ,args=( event,))
-    thread_csrnet_webcam = Thread(target = get_prediction_csrnet_webcam ,args=( event,))
 
-    
     if request.method == 'POST':
         method = request.form['method']
         print('method',method)
         # Remove existing images in directory
         
-
-        if request.form.get('stop-video') == 'stop-video':
-       
-
-            event.set()  
-        
-            
-
-            
-           # event = Event()
 
         
         if request.form.get('upload-file') == 'upload-file':
@@ -93,32 +79,16 @@ def upload_file():
                 prediction, density = get_prediction_p2pnet(file_name1)
             else:
                 prediction, density = get_prediction_crnet(file_name1)
-            #prediction, density = get_prediction(file_name1)
+
        
        
             if(  file_name1.endswith(".jpg") or file_name1.endswith(".jpeg") ):
-                return render_template('result.html', Prediction=prediction, File=filename, Density=density , Method=method) 
+                return render_template('result-image.html', Prediction=prediction, File=filename, Density=density , Method=method) 
             elif( file_name1.endswith(".mp4") ): 
                 return render_template('result-video.html',File=filename, Method=method) 
         elif request.form.get('use-webcam') == 'use-webcam':  
             return render_template('result-video.html', File ='',Method=method) 
-
-                
-    #        if method == 'fidtm':
-    #            event.clear()  
-    #            thread_fidtm_webcam.start()
-     #       elif method == 'p2pnet':
-      #          event.clear()  
-       #         thread_p2pnet_webcam.start()
-        #    else:
-         #       event.clear()  
-          #      thread_csrnet_webcam.start()
-
-    
-           
-      #      return render_template('result-webcam.html', Method=method) 
-
-            
+          
     return render_template('index.html')
     
  
@@ -147,7 +117,6 @@ def video_feed():
         return Response(gen(VideoCameraFIDTM(fileName)),        
                 mimetype='multipart/x-mixed-replace; boundary=frame') 
     elif method == 'p2pnet':
-        print("start p2pnetttttttttttttttttttttttt")
         return Response(gen(VideoCameraP2PNet(fileName)),        
                 mimetype='multipart/x-mixed-replace; boundary=frame') 
     else:
