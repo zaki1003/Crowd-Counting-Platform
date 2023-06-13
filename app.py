@@ -4,6 +4,7 @@ from flask import Flask, render_template, request, redirect, url_for, Response
 from camera_fidtm import VideoCamera as VideoCameraFIDTM
 from camera_p2pnet import VideoCamera as VideoCameraP2PNet
 from camera_csrnet import VideoCamera as VideoCameraCSRNet
+from camera_yolo import VideoCamera as VideoCameraYOLO
 
 
 
@@ -22,9 +23,8 @@ from threading import Thread, Event
 
 from inferenceCRNet import get_prediction as get_prediction_crnet
 
-
-
 from werkzeug.utils import secure_filename
+from inferenceYOLO import get_prediction_yolo as get_prediction_yolo
 
 UPLOAD_FOLDER = './static/'
 ALLOWED_EXTENSIONS = set(['.jpg', '.jpeg','mp4'])
@@ -72,24 +72,39 @@ def upload_file():
 
             if( file_name1.endswith(".mp4") ): 
                 return render_template('result-video.html',File=file_name1, Method=method) 
-
+                
             if method == 'fidtm':
                 prediction, density = get_prediction_fidtm(file_name1)
             elif method == 'p2pnet':
                 prediction, density = get_prediction_p2pnet(file_name1)
-            else:
-                prediction, density = get_prediction_crnet(file_name1)
-
-       
-       
+            elif method == 'crnet':
+                prediction, density = get_prediction_crnet(file_name1) 
+            else :
+                prediction, density = get_prediction_yolo(weights="best11.pt",source=file_name1)
+            
             if(  file_name1.endswith(".jpg") or file_name1.endswith(".jpeg") ):
                 return render_template('result-image.html', Prediction=prediction, File=filename, Density=density , Method=method) 
             elif( file_name1.endswith(".mp4") ): 
                 return render_template('result-video.html',File=filename, Method=method) 
         elif request.form.get('use-webcam') == 'use-webcam':  
-            return render_template('result-video.html', File ='',Method=method) 
+        	return render_template('result-video.html', File ='',Method=method) 
           
     return render_template('index.html')
+
+       
+"""
+            if(  file_name1.endswith(".jpg") or file_name1.endswith(".jpeg") ):
+                return render_template('result-image.html', Prediction=prediction, File=filename, Density=density , Method=method) 
+            elif( file_name1.endswith(".mp4") ): 
+                return render_template('result-video.html',File=filename, Method=method) 
+        elif request.form.get('use-webcam') == 'use-webcam':  
+            if method == 'yolov5':
+            	return get_prediction_yolo(weights="best11.pt",source=0)
+            else :
+            	return render_template('result-video.html', File ='',Method=method) 
+          
+    return render_template('index.html')
+"""
     
  
     
@@ -112,16 +127,22 @@ def video_feed():
     fileName = request.args.get('fileName', None)
     print("fileName", fileName)
     
-    
     if method == 'fidtm':
         return Response(gen(VideoCameraFIDTM(fileName)),        
                 mimetype='multipart/x-mixed-replace; boundary=frame') 
     elif method == 'p2pnet':
         return Response(gen(VideoCameraP2PNet(fileName)),        
                 mimetype='multipart/x-mixed-replace; boundary=frame') 
-    else:
+    elif method == 'crnet':
         return Response(gen(VideoCameraCSRNet(fileName)),        
                 mimetype='multipart/x-mixed-replace; boundary=frame') 
+    else :
+        return Response(gen(VideoCameraYOLO(fileName)),        
+                mimetype='multipart/x-mixed-replace; boundary=frame')
+    
+    """
+    return Response(gen(VideoCameraYOLO(fileName)),        
+                mimetype='multipart/x-mixed-replace; boundary=frame') """
     
    
 
