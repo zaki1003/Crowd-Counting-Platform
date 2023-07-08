@@ -8,32 +8,31 @@ models can be used for real-time applications on devices with limited computatio
 ## Screenshots
 
 ### Home
-![crowdcounting-website](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/ccb5a186-75de-4cbe-8bdf-a3d3d01618af)
-
-
-
+![crowdcounting-website](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/f3f1211a-18c5-4481-9601-bfe0aadadb2d)
 ### Prediction with FIDTM
 #### Image
-![FIDTM-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/070d0928-26a2-46c0-93fd-674b4a5df607)
+![FIDTM-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/127eda64-dc7e-4cae-afde-31fedaf9830b)
 #### Video
-![FIDTM-Video](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/f541cba7-5a73-4f38-ad23-af27239e2f1f)
+![FIDTM-Video](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/21764cce-c0f5-4a59-bb89-1e1d1acca841)
 ### Prediction with P2PNet
 #### Image
-![P2PNet-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/4032430f-0236-43a4-8f83-32c4fbf22a89)
+![P2PNet-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/f0329443-9d16-4c56-b28b-e326fb8c6582)
 #### Video
-![FIDTM-Video](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/f541cba7-5a73-4f38-ad23-af27239e2f1f)
+![P2PNet-Video](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/4c2f6f6d-98e2-485f-8128-b2b9209f18c2)
 
 ### Prediction with CSRNet
 #### Image
-![CSRNet-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/73b6bfad-36ce-4355-9721-e63be6b6e6aa)
+![CSRNet-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/1390512a-bc3d-480b-baf9-2c157425fb75)
 #### Video
-![FIDTM-Image](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/070d0928-26a2-46c0-93fd-674b4a5df607)
+![CSRNet-Video](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/43187f37-c35e-48b6-9adc-58ec404e5d70)
+
 
 ### Prediction with YOLO-CROWD
 #### Image
-![Capture d’écran du 2023-06-13 20-17-55](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/5d81bad6-bf85-46e3-b026-e3bc3ee1f6ee)
+![Capture d’écran du 2023-06-13 20-17-55](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/b9bbb1b1-2ddd-4ab1-9b0e-0583c2e4e4b0)
 #### Video
-![screen_YOLO](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/41ae3078-7b21-454b-a6bc-14572d284dd8)
+![screen_YOLO](https://github.com/zaki1003/Crowd-Counting-Platform/assets/65148928/374ea941-2db9-42d3-9e3a-ecce032c2515)
+
 
 
 ## Getting Started
