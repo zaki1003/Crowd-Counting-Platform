@@ -53,12 +53,12 @@ from utils.general import (DATASETS_DIR, LOGGER, NUM_THREADS, TQDM_BAR_FORMAT, c
 from utils.torch_utils import torch_distributed_zero_first
 
 device = select_device('')
-weights='/home/abdou/Bureau/yolov5copy/best11.pt'
+weights='./yolo-crowd.pt'
 model = DetectMultiBackend(weights, device=device, dnn=False, data=ROOT /'data/coco128.yaml', fp16=False)
 
 
 class VideoCamera(object):
-    weights='/home/abdou/Bureau/yolov5copy/best11.py'  # model path or triton URL
+    weights='./yolo-crowd.pt'  # model path or triton URL
     source=ROOT / 'data/images'  # file/dir/URL/glob/screen/0(webcam)
     data=ROOT / 'data/coco128.yaml'  # dataset.yaml path
     imgsz=(640, 640)  # inference size (height, width)

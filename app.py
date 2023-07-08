@@ -80,7 +80,7 @@ def upload_file():
             elif method == 'crnet':
                 prediction, density = get_prediction_crnet(file_name1) 
             else :
-                prediction, density = get_prediction_yolo(weights="best11.pt",source=file_name1)
+                prediction, density = get_prediction_yolo(weights="yolo-crowd.pt",source=file_name1)
             
             if(  file_name1.endswith(".jpg") or file_name1.endswith(".jpeg") ):
                 return render_template('result-image.html', Prediction=prediction, File=filename, Density=density , Method=method) 
