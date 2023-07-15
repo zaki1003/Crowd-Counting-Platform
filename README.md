@@ -1,5 +1,5 @@
 # Crowd-Counting-Platform
-A platform that implements 4 crowd counting algorithms and helps you to predict number of people in images, videos, and in your camera. It would be used to facilitate crowd counting and face detection for the users.
+A platform that implements 4 crowd counting algorithms and helps you to predict the number of people in images, videos, and in your camera. It would be used to facilitate crowd counting and face detection for the users.
 
 **CrowdCounting.AI** include the latest and the most powerful crowd counting algorithms that use different crowd counting approaches. It combines both heavyweight models and lightweight models. The heavyweight models can be used both on server-based platforms and powerful devices to get the best accuracy when dealing with dense crowds, while lightweight
 models can be used for real-time applications on devices with limited computational resources.
